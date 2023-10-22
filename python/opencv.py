@@ -44,7 +44,7 @@ while (t := sim.getSimulationTime()) < 10:
     # and color format is RGB triplets, whereas OpenCV uses BGR:
     img = cv2.flip(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), 0)
 
-    
+    '''
     # Harris Corner Detection implemented 
     gray = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
     gray_blur = cv2.blur(gray,(6,6))
@@ -68,7 +68,13 @@ while (t := sim.getSimulationTime()) < 10:
     img[res[:,3],res[:,2]] = [0,255,0]
 
     img[dst>0.01*dst.max()]=[0,0,255]
+    '''
 
+    cv2.imshow('', img)
+    cv2.waitKey(1)
+    client.step()  # triggers next simulation step
+
+    cv2.imwrite('image.jpg',img)
 
 sim.stopSimulation()
 

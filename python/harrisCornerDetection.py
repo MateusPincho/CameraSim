@@ -69,7 +69,19 @@ while (t := sim.getSimulationTime()) < 10:
 
     img[dst>0.01*dst.max()]=[0,0,255]
     '''
+    
+    patternSize = (7,7)
+    squareSize = (30)
+    imgSize = (1280,720)
+    imagePoints = []
 
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    ret, corners = cv2.findChessboardCornersSB(gray, patternSize, None)
+    if ret == True:
+        print("Corners found in image") #- see if corners are found 
+        imagePoints.append(corners)
+        cv2.drawChessboardCorners(img, patternSize, corners, ret)
+    
     cv2.imshow('', img)
     cv2.waitKey(1)
     client.step()  # triggers next simulation step

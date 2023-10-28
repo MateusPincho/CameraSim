@@ -10,7 +10,7 @@
 # blocking example, see simpleTest-nonBlocking.py
 
 import time
-
+import math
 import numpy as np
 import cv2
 
@@ -40,6 +40,12 @@ transformation_matrix = sim.getObjectMatrix(visionSensorHandle, -1)
 euler_angles = sim.getEulerAnglesFromMatrix(transformation_matrix)
 print(euler_angles)
 
+#Vision sensor internal parameters
+#Run this before to adjust the perspective angle
+def get_perspective_angle(focal_length, sensor_size):
+    perspective_angle = 2*math.atan(sensor_size / (2*focal_length))
+    return perspective_angle
+
 while (t := sim.getSimulationTime()) < 10:
     img, resX, resY = sim.getVisionSensorCharImage(visionSensorHandle)
     img = np.frombuffer(img, dtype=np.uint8).reshape(resY, resX, 3)
@@ -49,8 +55,6 @@ while (t := sim.getSimulationTime()) < 10:
     # and color format is RGB triplets, whereas OpenCV uses BGR:
     img = cv2.flip(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), 0)
 
-    
-    
     cv2.imshow('', img)
     cv2.waitKey(1)
     client.step()  # triggers next simulation step

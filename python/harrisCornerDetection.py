@@ -32,7 +32,7 @@ defaultIdleFps = sim.getInt32Param(sim.intparam_idle_fps)
 sim.setInt32Param(sim.intparam_idle_fps, 0)
 
 # Run a simulation in stepping mode:
-client.setStepping(True)
+#client.setStepping(True)
 sim.startSimulation()
 
 transformation_matrix = sim.getObjectMatrix(visionSensorHandle, -1)
@@ -76,7 +76,7 @@ while (t := sim.getSimulationTime()) < 5:
     
     cv2.imshow('', img)
     cv2.waitKey(1)
-    client.step()  # triggers next simulation step
+    #client.step()  # triggers next simulation step
 
     cv2.imwrite('image.jpg',img)
 

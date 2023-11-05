@@ -43,8 +43,14 @@ print(euler_angles)
 #Vision sensor internal parameters
 #Run this before to adjust the perspective angle
 def get_perspective_angle(focal_length, sensor_size):
+    #for camera v2: 
+    #focal lenght = 3.04mm
+    #sensor size = 4.6 mm
     perspective_angle = 2*math.atan(sensor_size / (2*focal_length))
     return perspective_angle
+
+print(get_perspective_angle(3.04,3.68))
+
 
 while (t := sim.getSimulationTime()) < 10:
     img, resX, resY = sim.getVisionSensorCharImage(visionSensorHandle)

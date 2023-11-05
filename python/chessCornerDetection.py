@@ -37,7 +37,7 @@ client.setStepping(True)
 sim.startSimulation()
 
 while (t := sim.getSimulationTime()) < 10:
-    print(sim.getObjectPosition(cubo,-1))
+    #print(sim.getObjectPosition(cubo,-1))
 
     img, resX, resY = sim.getVisionSensorCharImage(visionSensorHandle)
     img = np.frombuffer(img, dtype=np.uint8).reshape(resY, resX, 3)

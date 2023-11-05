@@ -39,7 +39,7 @@ transformation_matrix = sim.getObjectMatrix(visionSensorHandle, -1)
 euler_angles = sim.getEulerAnglesFromMatrix(transformation_matrix)
 print(euler_angles)
 
-while (t := sim.getSimulationTime()) < 10:
+while (t := sim.getSimulationTime()) < 5:
     img, resX, resY = sim.getVisionSensorCharImage(visionSensorHandle)
     img = np.frombuffer(img, dtype=np.uint8).reshape(resY, resX, 3)
 

@@ -64,7 +64,6 @@ transformation_matrix = sim.getObjectMatrix(visionSensorHandle, -1)
 euler_angles = sim.getEulerAnglesFromMatrix(transformation_matrix)
 print(euler_angles)
 
-<<<<<<< HEAD
 #Vision sensor internal parameters
 #Run this before to adjust the perspective angle
 def get_perspective_angle(focal_length, sensor_size):
@@ -77,12 +76,11 @@ def get_perspective_angle(focal_length, sensor_size):
 print(get_perspective_angle(3.04,3.68))
 
 
-=======
 # Number of calibration images
 number_images = 5
 
 # See the Vision sensor image
->>>>>>> 4721270a8011dfa4d4f213978634e9cd6312b584
+
 while (t := sim.getSimulationTime()) < 10:
     img, resX, resY = sim.getVisionSensorCharImage(visionSensorHandle)
     img = np.frombuffer(img, dtype=np.uint8).reshape(resY, resX, 3)

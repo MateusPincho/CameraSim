@@ -77,26 +77,26 @@ print(get_perspective_angle(3.04,3.68))
 
 
 # Number of calibration images
-number_images = 5
+number_images = 20
 
 # See the Vision sensor image
 
 while (t := sim.getSimulationTime()) < 10:
-    img, resX, resY = sim.getVisionSensorCharImage(visionSensorHandle)
-    img = np.frombuffer(img, dtype=np.uint8).reshape(resY, resX, 3)
-    # In CoppeliaSim images are left to right (x-axis), and bottom to top (y-axis)
-    # (consistent with the axes of vision sensors, pointing Z outwards, Y up)
-    # and color format is RGB triplets, whereas OpenCV uses BGR:
-    img = cv2.flip(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), 0)
-    #cv2.imshow('', img)
-    #cv2.waitKey(1)
-
     p=sim.getObjectPosition(cubo,-1)
-    transformation_matrix = sim.getObjectMatrix(cubo, -1)
-    print(p, transformation_matrix,'\n','\n')
-    time.sleep(0.75)
 
-    cv2.imwrite('image.jpg',img)
+    for idx in range(number_images):
+        # Nova posição aleatória
+        ds = randt(0.35)
+        sim.setObjectPosition(cubo,-1, sum_coord(p,ds))
+
+        # Tira a foto
+        img, resX, resY = sim.getVisionSensorCharImage(visionSensorHandle)
+        img = np.frombuffer(img, dtype=np.uint8).reshape(resY, resX, 3)
+        img = cv2.flip(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), 0)
+
+        # Escreve a imagem
+        cv2.imwrite(f'image{idx}.jpg',img)
+        time.sleep(0.75)
 
 sim.stopSimulation()
 

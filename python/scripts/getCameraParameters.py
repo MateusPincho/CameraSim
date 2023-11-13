@@ -68,8 +68,8 @@ print(euler_angles)
 #Run this before to adjust the perspective angle
 def get_perspective_angle(focal_length, sensor_size):
     #for camera v2: 
-    #focal lenght = 3.04mm
-    #sensor size = 4.6 mm
+    #focal lenght = 3,04mm
+    #sensor size = 3,68 mm
     perspective_angle = 2*math.atan(sensor_size / (2*focal_length))
     return perspective_angle
 
@@ -85,16 +85,16 @@ while (t := sim.getSimulationTime()) < 10:
     p=sim.getObjectPosition(cubo,-1)
 
     for idx in range(number_images):
-        # Nova posição aleatória
+        # New aleatory position
         ds = randt(0.35)
         sim.setObjectPosition(cubo,-1, sum_coord(p,ds))
 
-        # Tira a foto
+        # Take a photo
         img, resX, resY = sim.getVisionSensorCharImage(visionSensorHandle)
         img = np.frombuffer(img, dtype=np.uint8).reshape(resY, resX, 3)
         img = cv2.flip(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), 0)
 
-        # Escreve a imagem
+        # Write the image
         cv2.imwrite(f'image{idx}.jpg',img)
         time.sleep(0.75)
 

@@ -11,15 +11,11 @@ client = RemoteAPIClient()
 sim = client.getObject('sim')
 print("program started")
 
-# call API function:
-h = sim.getObject('/Floor')
-print(h)
-
 visionSensorHandle = sim.getObject('/Vision_sensor')
 
 sim.startSimulation()
 
-while (t := sim.getSimulationTime()) < 10:
+while (t := sim.getSimulationTime()) < 100:
     img, resX, resY = sim.getVisionSensorCharImage(visionSensorHandle)
     img = np.frombuffer(img, dtype=np.uint8).reshape(resY, resX, 3)
 

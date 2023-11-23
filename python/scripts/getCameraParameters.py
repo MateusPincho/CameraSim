@@ -83,7 +83,7 @@ while (t := sim.getSimulationTime()) < 10:
         # Take a photo
         img, resX, resY = sim.getVisionSensorCharImage(visionSensorHandle)
         img = np.frombuffer(img, dtype=np.uint8).reshape(resY, resX, 3)
-        img = cv2.flip(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), 0)
+        #img = cv2.flip(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), 0)
 
         # Write the image
         cv2.imwrite(f'image{idx}.jpg',img)
